@@ -1,0 +1,30 @@
+get:
+  summary: Get user data
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              age:
+                type: number
+  parameters:
+    - name: userId
+      in: path
+      description: User ID
+      required: true
+      example: 123456
+      schema:
+        type: number
+    - name: some_query
+      in: query
+      description: This is an query param
+      example: 123
+    - name: x-some-header
+      in: header
+      description: This is an header param
+      example: 123

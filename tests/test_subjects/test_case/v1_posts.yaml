@@ -1,0 +1,35 @@
+get:
+  summary: Get blog posts
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                likes:
+                  type: number
+        application/xml:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                likes:
+                  type: number
+                # Different from application/json response
+                # so we can tell we got the correct schema
+                content_xml:
+                  type: string
+  x-api-tests:
+    # Generate test request with values from parameters[*].example
+    - type: request_test_case
+      value:
+        response: 200

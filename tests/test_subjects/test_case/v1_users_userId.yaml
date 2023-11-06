@@ -1,0 +1,49 @@
+get:
+  summary: Get user data
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [name, age]
+            properties:
+              name:
+                type: string
+              age:
+                type: number
+    404:
+      description: User not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+
+  parameters:
+    - name: userId
+      in: path
+      description: User ID
+      required: true
+      example: 123456
+      schema:
+        type: number
+    - name: some_query
+      in: query
+      description: This is an query param
+      example: 123
+  x-api-tests:
+    # Should be ignored
+    - type: unknown_type
+    # Generate test request with values from parameters[*].example
+    - type: request_test_case
+      value:
+        response: 200
+    # Test custom test case description
+    - type: request_test_case
+      value:
+        response: 404
+        description: 'This is custom description.'
