@@ -1,0 +1,23 @@
+get:
+  summary: Get blog posts
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                likes:
+                  type: number
+  x-api-tests:
+    - type: request_test_case
+      value:
+        response: 200
+    - type: request_test_case
+      value:
+        response: 200

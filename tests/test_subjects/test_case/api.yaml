@@ -1,0 +1,14 @@
+openapi: 3.0.3
+info:
+  title: Demo API
+  version: 1.0.0
+  description: Hello World
+servers:
+  - url: https://example.com
+    description: Production
+paths:
+  /v1/users/{userId}:
+    $ref: ./v1_users_userId.yaml
+  /v1/posts:
+    $ref: ./v1_posts.yaml
+

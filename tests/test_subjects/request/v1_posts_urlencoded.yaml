@@ -1,0 +1,42 @@
+get:
+  summary: Get blog posts
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                likes:
+                  type: number
+post:
+  summary: Create blog post
+  responses:
+    201:
+      description: Create success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                likes:
+                  type: number
+  requestBody:
+    content:
+      application/x-www-form-urlencoded:
+        schema:
+          type: object
+          properties:
+            title:
+              type: string
+            content:
+              type: string
