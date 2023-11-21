@@ -34,8 +34,7 @@ class TestCase
         string    $path,
         Operation $operation,
         string    $externalBasePath
-    )
-    {
+    ) {
         $this->testSpec = $testSpec;
         $this->code = $testSpec['response'] ?? null;
         $this->mediaType = $testSpec['media-type'] ?? 'application/json';

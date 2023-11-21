@@ -4,9 +4,9 @@ namespace Goez\OpenAPI\Tester;
 
 class ValidationResult
 {
-    const ERROR_TYPE_SCHEMA = 'schema';
-    const ERROR_TYPE_CODE = 'code';
-    const ERROR_TYPE_PARSE = 'parse';
+    public const ERROR_TYPE_SCHEMA = 'schema';
+    public const ERROR_TYPE_CODE = 'code';
+    public const ERROR_TYPE_PARSE = 'parse';
 
     private array $schema;
     private string $response;
