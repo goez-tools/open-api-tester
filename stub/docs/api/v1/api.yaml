@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: "API Documentation"
+  version: "v1"
+  description: API Documentation
+paths:
+  /api/health:
+    $ref: ./paths/health.yaml
+  /api/users/{id}:
+    $ref: ./paths/users_id.yaml
+tags:
+  - name: Common
+    description: Common endpoints
+  - name: Users
+    description: Users endpoints
+servers:
+  - url: https://example.com
+    description: "Production"
+components:
+  securitySchemes:
+    JWTAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      $ref: ./definitions/User.yaml

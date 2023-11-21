@@ -1,0 +1,51 @@
+get:
+  summary: Retrieve an existing user
+  operationId: Retrieve an existing user
+  description: |-
+    Retrieve the information of the specified user.
+    If the user does not exist, return 404.
+  tags:
+    - Users
+  security:
+    - JWTAuth: []
+  parameters:
+    - name: id
+      in: path
+      description: User ID
+      required: true
+      example: "1"
+      schema:
+        type: string
+  responses:
+    "200":
+      description: "Successfully retrieved an existing user."
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: ../api.yaml#/components/schemas/User
+    "404":
+      description: "User does not exist."
+      headers: {}
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Not found
+                required: true
+  x-api-tests:
+    - type: request_test_case
+      value:
+        response: 200
+        description: "Successfully retrieved an existing user."
+    - type: request_test_case
+      value:
+        response: 404
+        description: "User does not exist."
+        parameters:
+          - name: id
+            in: path
+            value: "9999999999"

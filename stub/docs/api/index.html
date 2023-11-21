@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
+    <style>
+        body {
+            font-family: ui-sans-serif, sans-serif;
+            font-size: 12px;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<script>
+    // This variable will be injected by Gitlab CI. It starts with a slash but does not end with one
+    let urlBase = '__URL_BASE__';
+
+    // If not injected, it is considered a null value (used for local testing)
+    if (urlBase === '__' + 'URL_BASE' + '__') {
+        urlBase = '';
+    }
+
+    let version = location.pathname.replace(urlBase, '').split('/')[1];
+    urlBase = version ? urlBase + '/' + version : urlBase;
+
+    const app = document.createElement('elements-api');
+    app.setAttribute('apiDescriptionUrl', urlBase + '/api.yaml');
+    app.setAttribute('basePath', urlBase + '/');
+    document.body.appendChild(app);
+</script>
+</body>
+</html>

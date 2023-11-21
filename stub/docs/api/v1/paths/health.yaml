@@ -1,0 +1,25 @@
+get:
+  summary: Service health checking
+  operationId: Service health checking
+  description: |-
+    For external systems to verify the service status
+  tags:
+    - Common
+  responses:
+    "200":
+      description: "The service is working"
+      headers: {}
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: OK
+                required: true
+  x-api-tests:
+    - type: request_test_case
+      value:
+        response: 200
+        description: "The service is working"

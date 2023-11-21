@@ -1,0 +1,17 @@
+type: object
+properties:
+  id:
+    type: number
+    example: 1
+    description: User ID
+    required: true
+  name:
+    type: string
+    example: John Wick
+    description: User name
+    required: true
+  email:
+    type: string
+    example: johnwick@example.com
+    description: User email
+    required: true
