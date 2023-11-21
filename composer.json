@@ -27,5 +27,15 @@
     "phpunit/phpunit": "^9.5",
     "laravel/pint": "^1.13",
     "orchestra/testbench": "^8.15"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Goez\\OpenAPI\\Tester\\OpenApiTesterServiceProvider"
+      ]
+    }
+  },
+  "suggest": {
+    "sempro/phpunit-pretty-print": "To print the validation results of each endpoint"
   }
 }
