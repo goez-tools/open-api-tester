@@ -9,9 +9,22 @@ Test API output format using Open API Spec 3 document.
 
 ## Installation
 
-```sh
+Install this package into your project:
+
+```shell
 composer require goez/open-api-tester --dev
 ```
+
+Generate an API documentation example and a PHPUnit test case in your Laravel project:
+
+```shell
+php artisan vendor:publish --tag=open-api-tester
+```
+
+The command will generate the following files:
+
+- `docs/api/*`: The API documentation example.
+- `tests/Feature/OpenApiSchemaTest.php`: The PHPUnit test case.
 
 ## Basic Usage
 
@@ -132,27 +145,9 @@ foreach ($testCases as $testName => $testCase) {
 
 ## Using Laravel/Lumen with PHPUnit
 
-### Define a dataProvider
+### Define a PHPUnit Test Case
 
-```php
-public function endpointProvider()
-{
-    $docPath = __DIR__ . '/docs/api.yaml';
-    $testSuite = \Goez\OpenAPI\Tester\TestSuite::loadFromYamlFile($docPath, 'API Schema Test', __DIR__ . '/test_files/');
-    $warnings = $testSuite->getWarnings();
-
-    if (count($warnings) > 0) {
-      // Print out the warnings
-        echo implode("\n", $warnings);
-    }
-
-    // The result should match the format of PHPUnit's dataProvider:
-    // ex: [ 'test case 1' => [case], 'test case 2' => [case], ... ]
-    return array_map(function ($testCase) {
-        return [$testCase];
-    }, $testSuite->getTestCases());
-}
-```
+You can refer this file `tests/Feature/OpenApiSchemaTest.php`.
 
 ### Organizing the Request Format
 
@@ -199,46 +194,5 @@ public function extractRequestInfo(\Goez\OpenAPI\Tester\Request\Request $request
         })->toArray();
 
     return [$body, $files, $server];
-}
-```
-
-### Define a PHPUnit Test Case
-
-```php
-/**
- * @test
- * @dataProvider endpointProvider
- */
-public function it_should_get_valid_response(\Goez\OpenAPI\Tester\TestCase $testCase)
-{
-    $this->callHooks($testCase->getSetUpHook());
-
-    // Retrieve test request information
-    $exampleRequest = $testCase->getRequest();
-    [$body, $files, $server] = $this->extractRequestInfo($exampleRequest);
-
-    // Create a mock user
-    $user = User::factory()->create();
-
-    // Send a simulated request to Laravel
-    $response = $this->actingAs($user)->call(
-        $exampleRequest->getMethod(),
-        $exampleRequest->getPath() . '?' . http_build_query($exampleRequest->getQuery()),
-        $body,
-        [],
-        $files,
-        $server,
-        ''
-    );
-
-    // Validate the result
-    $result = $testCase->validate(
-        $response->getStatusCode(),
-        $response->getContent() ?: 'null'
-    );
-
-    $this->assertTrue($result->isValid(), $result->renderReport());
-
-    $this->callHooks($testCase->getTearDownHook());
 }
 ```
